@@ -41,6 +41,7 @@ function validarNum(e) {
             valApellido();
             valEmail();
             valEdad();
+            valCarrera();
             
         })
         
@@ -75,6 +76,8 @@ function valDv() {
 
             $("#dv").addClass("is-invalid");  
         }          
+    }else{
+        $("#dv").addClass("is-invalid"); 
     }
  }
 
@@ -92,6 +95,8 @@ function valRun() {
 
                 $("#rut").addClass("is-invalid");  
         }          
+    }else{
+        $("#rut").addClass("is-invalid");
     } 
 }
 
@@ -217,6 +222,28 @@ function valEmail(){
         
     }
 }
+
+
+ function valCarrera() {
+    if ($("#carrera").val() != "") {
+        if($("#carrera").hasClass("is-invalid")){
+            $("#carrera").removeClass("is-invalid");
+            $("#carrera").addClass("is-valid");
+        }
+        else{
+            $("#carrera").addClass("is-valid")
+        }
+
+    } else {
+        if($("#carrera").hasClass("is-valid")){
+            $("#carrera").removeClass("is-valid");
+            $("#carrera").addClass("is-invalid");
+        }
+        
+    }
+}
+
+
 
 
 /*function valMarca() {

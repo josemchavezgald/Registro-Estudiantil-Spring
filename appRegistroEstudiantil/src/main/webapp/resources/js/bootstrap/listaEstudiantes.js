@@ -1,7 +1,7 @@
 var exprut = /^([0-9]{8}|[0-9]{7})-([\dkK])$/;
 var expnombre = /^([ñA-Za-z\s])+[ñA-Za-z][ñA-Za-z]$/;
 
-function eliminarAlumno(id)
+function eliminarAlumno()
 {
     if (window.confirm("¿Esta seguro que quiere eliminar al estudiante del registro?")) {
         document.getElementById("del").submit();
@@ -33,6 +33,18 @@ function validarBusquedaNombre(){
 	 	 $("#nombreCompleto").addClass("is-invalid");  
 	 }
 	 
+}
+
+function validarBusquedaCarrera(){
+    console.log("pasa");
+     if (($("#carrera").val()) != "") {
+        document.getElementById("buscarCarrera").submit();
+        
+     }
+     else{
+         $("#carrera").addClass("is-invalid");  
+     }
+     
 }
 
 function validarRut() {

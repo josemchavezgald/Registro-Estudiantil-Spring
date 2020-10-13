@@ -76,14 +76,24 @@
 				<form:errors path="apellido" cssClass="error"></form:errors>
 			</div>
 			
-			
+				
 			<div class="form-group col-md-4 ">
 				<label class="col-form-label">Email: </label><form:input  path="email" class="form-control col-md-11"  />
 				<form:errors path="email" cssClass="error"></form:errors>
 			</div>
+			
+			<div class="form-group col-md-4 ">
+				<label class="col-form-label">Carrera: </label>
+				<form:select class="form-control col-md-11" path="carrera">
+					<form:option selected="true" value="" label="Elija carrera..."/>
+					<form:options itemLabel="descripcion" itemValue="id" items="${carreras}"/>
+				</form:select>
+				<form:errors path="carrera" cssClass="error"></form:errors>
+			</div>
+			
                     
-            <div class="form-group col-md-8 ">
-				<label class="col-form-label">Ciudad de residencia</label><form:select path="ciudad" class="form-control col-md-5" >
+            <div class="form-group col-md-4 ">
+				<label class="col-form-label">Ciudad de residencia</label><form:select path="ciudad" class="form-control col-md-6" >
 					<form:option selected="true" value="" label="Elija ciudad..."/>
 					<form:options items="${ciudades}" />
 				</form:select>

@@ -35,16 +35,22 @@
 	</nav>
 </div>
 <br>
-<h3 style="text-align: center;">Estudiante ingresado correctamente</h3><br>
+
+<div class="container">
+	<div class="alert alert-success"  style="text-align: center;" role="alert" >
+	  			Estudiante ingresado correctamente
+	</div>
+</div>
 
 
-<div class="container-fluid border" style="width: 400px; height: 300px; margin: 0 auto; border: 10px;">
+
+<div class="container-fluid border" style="width: 400px; height: 320px; margin: 0 auto; border: 10px;">
             
     <br>
     
 
         <div>
-            <h5>Datos Estudiante:</h5>
+            <h5>Datos Estudiante</h5>
         </div>
     <div>
         <p>
@@ -58,6 +64,8 @@
             Edad: ${estudiante.edad} <br>
             
             Email: ${estudiante.email}<br>
+            
+            Carrera: ${estudiante.carrera.descripcion} <br>
 
             Ciudad: ${estudiante.ciudad}<br>
 
@@ -74,22 +82,15 @@
         </p>
     </div>
  </div>
- 
  <br>
- 
- 
- 
-
- 
- 
  <div class="row text-center">
  	<div class="col-md-12">
-		<a href="./estudiante" ><button  class="btn btn-light">Nuevo estudiante</button></a> 	
+		<a href="./estudiante" ><button  class="btn btn-light col-md-3">Nuevo estudiante</button></a> 	
  	</div>	
  	<br>
  	<br>
 	<div class="col-md-12">
- 		<a href="/listarEstudiantes"><button  class="btn btn-primary">Lista de estudiantes</button></a>
+ 		<a href="/listarEstudiantes"><button  class="btn btn-primary col-md-3">Lista de estudiantes</button></a>
  	</div>
  </div>
   
@@ -106,6 +107,7 @@
 	      <th scope="col">Rut</th>
 	      <th scope="col">Estudiante</th>
 	      <th scope="col">Email</th>
+	      <th scope="col">Carrera</th>
 	      <th scope="col">Lenguajes</th>
 	      <th scope="col">OS</th>
 	      <th scope="col">Edad</th>
@@ -119,6 +121,7 @@
 	      <td >${es.nombre} ${es.apellido }</td>
 	     
 	      <td>${es.email}</td>
+	      <td>${es.carrera.descripcion}</td>
 	      <td>
 	      	<c:forEach var = "e" items = "${es.lenguajePro}">
                      <c:out value = "${e}"/> 

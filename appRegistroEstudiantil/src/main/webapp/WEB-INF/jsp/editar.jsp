@@ -80,9 +80,18 @@
 					<label class="col-form-label">Email: </label><form:input  path="email"  onchange ="valEmail()"  class="form-control col-md-11"  value="${estudianteBuscado.email}"/>
 					<form:errors path="email" cssClass="error"></form:errors>
 				</div>
+				
+				<div class="form-group col-md-4 ">
+					<label class="col-form-label">Carrera:</label><form:select path="carrera"  onchange ="valCarrera()" class="form-control col-md-11" >
+						<form:option selected="false" value="" label="Elija ciudad..."/>
+						<form:option selected="true" value="${estudianteBuscado.carrera.id}" label="${estudianteBuscado.carrera.descripcion}"/>
+						<form:options itemLabel="descripcion" itemValue="id" items="${carreras}"/>
+						</form:select>
+					<form:errors path="ciudad" cssClass="error"></form:errors>
+				</div>
 	                    
-	            <div class="form-group col-md-8 ">
-					<label class="col-form-label">Ciudad de residencia</label><form:select path="ciudad"  onchange ="valCiudad()" class="form-control col-md-5" >
+	            <div class="form-group col-md-4 ">
+					<label class="col-form-label">Ciudad de residencia:</label><form:select path="ciudad"  onchange ="valCiudad()" class="form-control col-md-6" >
 						<form:option selected="false" value="" label="Elija ciudad..."/>
 						<form:option selected="true" value="${estudianteBuscado.ciudad}" label="${estudianteBuscado.ciudad}"/>
 						<form:options items="${ciudades}" />

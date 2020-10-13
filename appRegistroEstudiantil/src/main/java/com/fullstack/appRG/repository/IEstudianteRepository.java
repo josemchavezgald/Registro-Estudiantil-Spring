@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.fullstack.appRG.modelo.Carrera;
 import com.fullstack.appRG.modelo.Estudiante;
 
 public interface IEstudianteRepository extends JpaRepository<Estudiante, Integer>{
@@ -15,7 +16,7 @@ public interface IEstudianteRepository extends JpaRepository<Estudiante, Integer
   	List<Estudiante> findAllByOrderByIdDesc();
   	List<Estudiante> findByNombreAndApellido(String nombre, String apellido);
   	List<Estudiante> findByNombre(String nombre);
-  	
+  	List<Estudiante> findByCarrera(Carrera c);
 
 
 

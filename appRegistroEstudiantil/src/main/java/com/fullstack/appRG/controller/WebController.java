@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.fullstack.appRG.modelo.Carrera;
 import com.fullstack.appRG.modelo.Ciudad;
 import com.fullstack.appRG.modelo.Estudiante;
+import com.fullstack.appRG.repository.ICarreraRepository;
 import com.fullstack.appRG.repository.IEstudianteRepository;
 
 @Controller
@@ -24,11 +26,21 @@ public class WebController {
 	@Autowired
 	private IEstudianteRepository repo;
 	
+	@Autowired
+	private ICarreraRepository repoCarrera;
+	
 	@ModelAttribute("estudiante")
 	public Estudiante setEstudiante() {
 		
 		return new Estudiante();
 	}
+	
+	@ModelAttribute("carreras")
+	public List<Carrera> setCarreras() {
+		
+		return repoCarrera.findAllByOrderByDescripcionAsc();
+	}
+	
 	
 	@ModelAttribute("lenguajes")
 	public List<String> lenguajes(){
@@ -95,9 +107,9 @@ public class WebController {
 	}
 	
 	@GetMapping("/estudiante")
-	public String getAddEstudiante()
+	public String getAddEstudiante(Model model)
 	{
-		return "estudiante";
+				return "estudiante";
 	}
 	
 	@PostMapping(value="addEstudiante")
@@ -126,7 +138,7 @@ public class WebController {
 	
 	@GetMapping("listarEstudiantes")
 	public String listarEstudiantes(Model model) {
-		List<Estudiante> estudiantes = repo.findAllByOrderByIdDesc();
+		List<Estudiante> estudiantes = repo.findAllByOrderByNombreAsc();
 		model.addAttribute("estudiantes", estudiantes);
 		return "listarEstudiantes";
 	}
@@ -183,6 +195,7 @@ public class WebController {
 	
 	@PostMapping(value="eliminarEstudiante")
 	public String eliminar(String id, Model model) {
+		System.out.println(id);
 		repo.deleteById(Integer.parseInt(id));
 		List<Estudiante> estudiantes = repo.findAllByOrderByNombreAsc();
 		model.addAttribute("estudiantes", estudiantes);
@@ -195,6 +208,17 @@ public class WebController {
 		List<String> run = Arrays.asList(rut.split("-"));
 		String digitos = run.get(0);
 		model.addAttribute("estudiantes", repo.findByRut(digitos));
+		return "listarEstudiantes";
+	}
+	
+	@PostMapping("buscarEstudianteCarrera")
+	public String buscarEstudianteRut(int carrera, Model model) 
+	{
+		System.out.print(carrera);
+		Carrera c = new Carrera();
+		c.setId(carrera);
+		List<Estudiante> alumnos_por_carrera = repo.findByCarrera(c);
+		model.addAttribute("estudiantes", alumnos_por_carrera);
 		return "listarEstudiantes";
 	}
 	

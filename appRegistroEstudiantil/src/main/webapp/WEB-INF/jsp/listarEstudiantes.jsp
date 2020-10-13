@@ -37,56 +37,80 @@
 
 
 
-<div class = "container text-center" style="height:1000px">
+<div class = "container-fluid text-center" >
 
 	<div class="form-row col-md-12">
-             <h4 style="margin-left: -15px;">Lista de estudiantes</h4>
+             <h4>Lista de estudiantes</h4>
              
      </div>
      <br> 
  
-	
+	<c:if test="${updateCorrecto != null }">
+			<div class="alert alert-success" role="alert" >
+  				${updateCorrecto}
+			</div>
+		</c:if>
 	
 	<div class="row card-body">
-		<div class="col-md-6 ">
+		<div class="col-md-4 ">
 			<form class="form-inline" action="buscarEstudianteRut" method="post" id="buscarRut" >
-			  <div class="form-group mb-2">
-			    <label>    Ingrese rut alumno:</label>
+			  <div class="form-group mb-2 col-md-12">
+			    <label >    Ingrese rut alumno:</label>
 			  </div>
 			  <div class="form-group mx-sm-3 mb-2">
-			    <input type="text" class="form-control" id="rut" name="rut" placeholder="ej: 12345678-0"  onkeypress="return validarRun(event)"  maxlength="10" required="required">
-				<div class="invalid-tooltip">
+			    <input type="text" class="form-control col-md-12"  id="rut" name="rut" placeholder="Ingrese rut ej: 12345678-0"  onkeypress="return validarRun(event)"  maxlength="10" required="required">
+				<div class="invalid-tooltip" style="margin-left:25%;">
 				     Ingrese un rut valido.
 				</div>
 			  </div>
-			  <input type="button" onclick="validarBusquedaRut()"  class="btn btn-secondary mb-2"  value="Buscar">
+			  <input type="button" onclick="validarBusquedaRut()"  class="btn btn-secondary mb-2"  value="Buscar ">
 			   
 			</form>
 		</div>
-		<div class="col-md-6">
-			<form class="form-inline" action="buscarEstudianteNombre" style="margin-left:15px;"  method="post" id="buscarNombre" >
-			  <div class="form-group mb-2">
+		<div class="col-md-4">
+			<form class="form-inline" action="buscarEstudianteNombre"   method="post" id="buscarNombre" >
+			  <div class="form-group mb-2 col-md-12">
 			    <label >Ingrese nombre alumno:</label>
 			  </div>
 			  <div class="form-group mx-sm-3 mb-2">
-			    <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" required="required">
-			    <div class="invalid-tooltip" style="margin-left:25px;">
+			    <input type="text" class="form-control colmd-12" id="nombreCompleto" name="nombreCompleto" required="required">
+			    <div class="invalid-tooltip" style="margin-left:25%;">
 				     Ingrese un nombre valido
 				</div>
 			  </div>
 			  <input type="button"  onclick ="validarBusquedaNombre()" class="btn btn-secondary mb-2"  value="Buscar">
 			</form>
 		</div>
+		<div class="col-md-4">
+			<form class="form-inline" action="buscarEstudianteCarrera" method="post" id="buscarCarrera" >
+			  <div class="form-group mb-2 col-md-12">
+			    <label >Seleccione carrera:</label>
+			  </div>
+			  <div class="form-group mx-sm-3 mb-2">
+			  
+			 	<select class="form-control col-md-12" id="carrera" name="carrera">
+						<option selected value="" >Elija carrera...</option>
+						<c:forEach var = "c" items = "${carreras}">
+							<option value="${c.id}" >${c.descripcion}</option>
+						</c:forEach>
+						
+				</select>
+			  
+			   
+			    <div class="invalid-tooltip" style="margin-left:25px;">
+				     Ingrese un nombre valido
+				</div>
+			  </div>
+			  <input type="button"  onclick ="validarBusquedaCarrera()" class="btn btn-secondary mb-2"  value="Buscar">
+			</form>
+		</div>
 	</div>
 				
-		<c:if test="${updateCorrecto != null }">
-			<div class="alert alert-success" role="alert" >
-  				${updateCorrecto}
-			</div>
-		</c:if>
+		
 		
      <br> 
-
+</div>
+<div class = "container-fluid text-center" style="height:1000px">
 	  <c:choose>
 	  
 	  <c:when test="${estudiantes.size() != 0}">
@@ -96,6 +120,7 @@
 		      <th scope="col">Rut</th>
 		      <th scope="col">Estudiante</th>
 		      <th scope="col">Email</th>
+		      <th scope="col">Carrera</th>
 		      <th scope="col">Lenguajes</th>
 		      <th scope="col">OS</th>
 		      <th scope="col">Edad</th>
@@ -108,8 +133,8 @@
 		  	<tr>
 		  	  <th scope="row">${es.rut}-${es.dv}</th>
 		      <td >${es.nombre} ${es.apellido }</td>
-		     
 		      <td>${es.email}</td>
+		      <td>${ es.carrera.descripcion}</td>
 		      <td>
 		      	<c:forEach var = "e" items = "${es.lenguajePro}">
 	                     <c:out value = "${e}"/> 
@@ -121,17 +146,17 @@
 		      <td>${es.ciudad }</td>
 		      <td >
 		      
-		      		<form action="cargarEstudianteMOD" style="margin-top:-5px; margin-right:-10px;"method="post">
+		      		<form action="cargarEstudianteMOD" style="margin-top:-5px; margin-right:-15px;"method="post">
 						<input type="hidden" name="id" value="${es.id}">
-						<input type="submit"  class="btn btn-light  " value="Actualizar">
+						<input type="submit"  class="btn btn-light" value="Actualizar">
 					</form>	
 			   
 		    
 				</td>
 				<td>
-					<form action="eliminarEstudiante" method="post" style="margin-top:-5px; margin-left:-10px;" id="del">
+					<form action="eliminarEstudiante" method="post" style="margin-top:-5px; margin-left:-15px;" id="del">
 						<input type="hidden" name="id" value="${es.id}"> 
-						<input type="button"  class="btn btn-danger " onclick="eliminarAlumno(${es.id})" value=" &#x233d; Eliminar">
+						<input type="button"  class="btn btn-danger" onclick="eliminarAlumno(${es.id})" value=" &#x233d; Eliminar">
 					</form>
 				</td>
 				

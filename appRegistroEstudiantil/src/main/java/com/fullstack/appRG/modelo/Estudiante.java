@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -40,6 +41,9 @@ public class Estudiante {
 	@Min(0)
 	@Max(130)
 	private int edad;
+	
+	@ManyToOne
+	private Carrera carrera;
 	
 	@NotEmpty(message="Debe rellenar el campo")
 	@Email
@@ -109,6 +113,14 @@ public class Estudiante {
 
 	public void setEdad(int edad) {
 		this.edad = edad;
+	}
+	
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
 	}
 
 	public String getCiudad() {
